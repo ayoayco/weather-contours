@@ -1,0 +1,11 @@
+body {  
+    font-family: "lucida grande", tahoma, verdana, arial, sans-serif;
+    color: #333;
+    line-height: 1.5;
+    padding: 30px;
+}  
+
+h1 {
+	font-size: x-large;
+	padding: 15px 0;
+}
