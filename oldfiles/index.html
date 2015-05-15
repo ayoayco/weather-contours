@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<link rel="icon" type="image/ico" href="noah-favicon.ico"/>
+	<link rel="stylesheet" href="css/reset.css"/>
+	<link rel="stylesheet" href="css/style.css"/>
+	<title>{{ title }}</title>
+	<link rel="stylesheet" href="jquery-ui/jquery-ui.css">
+	<script src="jquery-ui/jquery-1.11.2.min.js"></script>
+	<script src="jquery-ui/jquery-ui.js"></script>
+	<script>
+		$(function() {
+    	  $( ".datepicker" ).datepicker();
+		  $( "#slider-range" ).slider({
+		    range: true,
+		    min: 0,
+		    max: 500,
+		    values: [ 75, 300 ],
+		    slide: function( event, ui ) {
+		      $( "#amount" ).val( ui.values[ 0 ] + " - " + ui.values[ 1 ] );
+		    }
+		  });
+		  $( "#amount" ).val( $( "#slider-range" ).slider( "values", 0 ) +
+		    " - " + $( "#slider-range" ).slider( "values", 1 ) );
+		});
+	</script>
+</head>
+
+<body>
+
+	<h1>Project NOAH Contours</h1>
+	<form>
+		<label for="contourtype">Contour Type: </label>
+		<select id="contourtype">
+			<option></option>
+			<option value="temp">Temperature</option>
+			<option value="pres">Pressure</option>
+			<option value="humi">Humidity</option>
+			<option value="rain">Rainfall</option>
+			<option value="3-ho">3-Hour Rainfall</option>
+			<option value="6-ho">6-Hour Rainfall</option>
+			<option value="12-h">12-Hour Rainfall</option>
+			<option value="24-h">24-Hour Rainfall</option>
+		</select><br />
+		<label for="fromdate">From: </label>
+		<input type='text' id='fromdate' class='datepicker' /><br />
+		<label for="todate">To: </label>
+		<input type='text' id='todate' class='datepicker' />
+
+		<br />
+
+	</form>
+
+	  <label class="float-left" for="amount">Range:</label>
+	  <div class="float-left" id="slider-range"></div>
+	  <input class="float-left" type="text" id="amount" readonly style="border:0; font-weight:bold;">
+	  <div class="clear-both"></div>
+	  <hr />
+
+</body>
+
+</html>

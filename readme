@@ -1,0 +1,11 @@
+
+// create folders
+find -name '*.bz2' -exec sh -c 'mkdir "${1%.*.*}"' _ {} \;
+
+// extract to appropriate folders
+find * -name '*.bz2' -exec sh -c 'tar -xf "$1" -C "${1%.*.*}"' _ {} \;
+
+// remove archive files
+rm *.bz2
+
+

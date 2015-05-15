@@ -1,0 +1,21 @@
+timestamp=21-12-2014_13-50-00
+
+#####
+TYPE=air_humidity
+DATA:0
+	val,timestamp,lng,lat,csv_id
+
+#####
+TYPE=rain_value
+DATA:0
+	val,timestamp,lng,lat,csv_id
+
+#####
+TYPE=air_temperature
+DATA:0
+	val,timestamp,lng,lat,csv_id
+
+#####
+TYPE=air_pressure
+DATA:0
+	val,timestamp,lng,lat,csv_id
