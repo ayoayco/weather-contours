@@ -95,8 +95,55 @@
 
             }
 
+            function updateDownloadLink(date){
+
+                $('.downloadlink').remove();
+
+                var datearr = date.split('-');
+                var month = datearr[1];
+                var day = datearr[0];
+                var year = datearr[2];
+
+                var foldername = "latest_contours_"+year+"-"+month+"-"+day;
+
+                //show download link or archive file
+                $('#downloaddiv').append("<a title='"+monthtext[month-1]+" "+day+", "+year+"' class='buttonlink downloadlink' href='archive/"+foldername+".tar.bz2'>Download Contours</a>");
+            }
+
+            function updateTimeDiv(type, date){
+                //list all files in directory "yyyy-mm-dd"
+                $('#linksplaceholder').append("<h2 class='timeh2'>Time</h2>");
+                $('#linksplaceholder').append("<ul class='linklist'>");
+                    for(i=0; i<24; i++){
+                        var tempfilename = FormatNumberLength(i,2)+":20";
+                        $('.linklist').append("<li><a href='#' onclick=\"updateImage('"+type+"', '"+date+"', '"+FormatNumberLength(i,2)+"-20-00')\">"+tempfilename+"</a></li>");
+                    }
+                $('#linksplaceholder').append("</ul>");
+
+            }
 
             function updateImage(type, date, time){
+
+                $('.timeh2').remove();
+                $('.contourh1').remove();
+                $('.contourh3').remove();
+                $('.contourimage').remove();
+                $('.linklist').remove();
+                $('.errormessage').remove();
+
+                var errormessage = "";
+
+                if(type == ""){
+                    errormessage = errormessage+"*Please choose a Contour Type first.<br />";
+                }
+                if(date == ""){
+                    errormessage = errormessage+"*Please choose a Date first.<br />";
+                }
+
+                if(errormessage != ""){
+                    $('#errordiv').append("<p class='errormessage'>"+errormessage+"</p>");
+                    return 1;
+                }
 
                 var datearr = date.split('-');
                 var month = datearr[1];
@@ -104,12 +151,6 @@
                 var year = datearr[2];
 
                 chosenDate = new Date(year,month-1,day);
-
-                $('.contourh1').remove();
-                $('.contourh3').remove();
-                $('.contourimage').remove();
-                $('.linklist').remove();
-                $('.downloadlink').remove();
 
                 var typearr = type.split('_');
                 var timearr = time.split('-');
@@ -122,18 +163,9 @@
                 $('#imageplaceholder').append("<h1 class='contourh1'>"+capitalize(typearr[0])+" "+capitalize(typearr[1])+" "+capitalize(typearr[2])+"</h1><h3 class='contourh3'>"+monthtext[month-1]+" "+day+", "+year+" | "+timearr[0]+":"+timearr[1]+"</h3>");
                 $('#imageplaceholder').append("<img src='images/"+filename+"' class='contourimage' />");
 
+                updateTimeDiv(type, date);
 
-                //list all files in directory "yyyy-mm-dd"
-                $('#linksplaceholder').append("<ul class='linklist'>");
-                    for(i=0; i<24; i++){
-                        var tempfilename = FormatNumberLength(i,2)+":20";
-                        $('.linklist').append("<li><a href='#' onclick=\"updateImage('"+type+"', '"+date+"', '"+FormatNumberLength(i,2)+"-20-00')\">"+tempfilename+"</a></li>");
-                    }
-                $('#linksplaceholder').append("</ul>");
-
-                //show download link or archive file
-                $('#downloaddiv').append("<a class='buttonlink' href='archive/"+foldername+".tar.bz2'>Download Contours</a>");
-            };
+            }
 
         </script>
 </head>
@@ -158,7 +190,7 @@
         			<option value="24-h">24-Hour Rainfall</option-->
         		</select><br />
         		<label for="date" >Date: </label>
-        		<input type='text' name='date' id='date' class='datepicker' />
+        		<input readonly="true" onchange="updateDownloadLink($(this).val())" type='text' name='date' id='date' class='datepicker' />
             </div>
 
     	  <!--label class="float-left" for="amount">Range:</label>
@@ -167,11 +199,16 @@
     	  <div class="clear-both"></div-->
         </form>
         <div id="downloaddiv">
-          <a class='buttonlink' id="loadbutton" href="#" onclick="updateImage($('#contourtype').val(), $('#date').val(), '00-20-00')">Load</a>
+          <a class='buttonlink' id="loadbutton" href="#" onclick="updateImage($('#contourtype').val(), $('#date').val(), '00-20-00')">
+              Load 
+          </a>
         </div>
+        <div id="errordiv"></div>
     </div>
-    <div id="content">
+    <div id="content" class="float-left">
         <div class="float-left" id="imageplaceholder"></div>
+    </div>
+    <div id="rightmenu" class="float-right">
         <div class="float-left" id="linksplaceholder"></div>
     </div>
 </body>

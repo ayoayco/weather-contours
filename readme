@@ -1,5 +1,5 @@
 
-// create folders
+// create folders for each archive file
 find -name '*.bz2' -exec sh -c 'mkdir "${1%.*.*}"' _ {} \;
 
 // extract to appropriate folders

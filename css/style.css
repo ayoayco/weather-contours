@@ -1,6 +1,6 @@
 html, body {  
     font-family: "lucida grande", tahoma, verdana, arial, sans-serif;
-    color: #333;
+    color: #555;
     line-height: 1.5;
     height: 100%;
     padding: 0;
@@ -47,7 +47,7 @@ select, .datepicker {
 	margin-top: 15px;
 }
 #sidemenu {
-	width: 370px;
+	width: 330px;
 	padding: 0 20px;
 	background: #333;
 	color: white;
@@ -65,7 +65,6 @@ select, .datepicker {
 }
 
 #imageplaceholder, #linksplaceholder {
-	padding: 15px;
 }
 
 #content {
@@ -79,6 +78,7 @@ select, .datepicker {
 #downloaddiv {
 	padding: 15px;
 	padding-left: 0;
+	margin-top: 15px;
 }
 
 .buttonlink:active {
@@ -97,8 +97,7 @@ select, .datepicker {
 
     margin: 15px;
     margin-left: 0;
-
-    padding: 10px 15px;
+    padding: 7px 15px;
     background: #4479BA;
     color: #FFF;
     text-decoration: none;
@@ -121,3 +120,18 @@ select, .datepicker {
 #loadbutton {
 	margin-top: 20px;
 }
+
+#rightmenu {
+	width: 200px;
+	margin: 0;
+	padding: 15px;
+}
+
+input {
+	padding: 2px;
+}
+
+ a em {
+	font-size: x-small;
+	color: #ccc;
+ }
